@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
