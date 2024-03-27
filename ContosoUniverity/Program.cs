@@ -11,8 +11,11 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureSqlContext(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddApplicationPart(
+    typeof(ContosoUniversity.Presentation.AssemblyReference).Assembly);
 
 // Creates an IHost that hosts a web application.
 // Creates an IApplicationBuilder for the middleware pipeline
