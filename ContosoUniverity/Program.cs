@@ -2,9 +2,11 @@ using ContosoUniverity.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
-LogManager.Setup().LoadConfigurationFromXml(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
