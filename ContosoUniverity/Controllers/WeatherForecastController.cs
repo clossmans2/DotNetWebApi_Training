@@ -1,7 +1,7 @@
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ContosoUniverity.Controllers
+namespace ContosoUniversity.Controllers
 {
     [ApiController]
     [Route("[controller]")]

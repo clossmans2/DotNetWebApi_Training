@@ -1,4 +1,4 @@
-namespace ContosoUniverity
+namespace ContosoUniversity
 {
     public class WeatherForecast
     {

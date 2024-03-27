@@ -1,4 +1,4 @@
-using ContosoUniverity.Extensions;
+using ContosoUniversity.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
@@ -10,6 +10,7 @@ LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentD
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
+builder.Services.ConfigureRepositoryManager();
 
 builder.Services.AddControllers();
 
