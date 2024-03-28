@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Contracts;
+using Entities;
 using Service.Contracts;
 
 namespace Service
@@ -18,5 +19,8 @@ namespace Service
             _repositoryManager = repositoryManager;
             _logger = logger;
         }
+
+        public IEnumerable<OfficeAssignment> GetAllOfficeAssignments(bool trackChanges) =>
+            _repositoryManager.OfficeAssignment.GetAllOfficeAssignments(trackChanges);
     }
 }

@@ -10,26 +10,26 @@ namespace ContosoUniversity.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class EnrollmentController : ControllerBase
     {
         private readonly IServiceManager _service;
 
-        public StudentController(IServiceManager serviceManager) => _service = serviceManager;
-
+        public EnrollmentController(IServiceManager serviceManager) => _service = serviceManager;
 
         [HttpGet]
-        public IActionResult GetStudents()
+
+        public IActionResult GetAllEnrollments()
         {
             try
             {
-                var students = _service.Student.GetAllStudents(trackChanges: false);
-                return Ok(students);
+                var result = _service.Enrollment.GetAllEnrollments(trackChanges: false);
+                return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ex.Message);
             }
-        }
 
+        }
     }
 }

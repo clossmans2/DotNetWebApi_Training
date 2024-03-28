@@ -13,5 +13,7 @@ namespace Repository
         public DepartmentRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Department> GetAllDepartments(bool trackChanges) => FindAll(trackChanges).OrderBy(s => s.Name).ToList();
     }
 }

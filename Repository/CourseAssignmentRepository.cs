@@ -13,5 +13,7 @@ namespace Repository
         public CourseAssignmentRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<CourseAssignment> GetAllCourseAssignments(bool trackChanges) => FindAll(trackChanges).OrderBy(s => s.CourseId).ToList();
     }
 }

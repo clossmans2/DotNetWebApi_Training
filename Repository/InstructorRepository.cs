@@ -13,5 +13,7 @@ namespace Repository
         public InstructorRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Instructor> GetAllInstructors(bool trackChanges) => FindAll(trackChanges).OrderBy(s => s.LastName).ToList();
     }
 }

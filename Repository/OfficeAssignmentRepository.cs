@@ -13,5 +13,8 @@ namespace Repository
         public OfficeAssignmentRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<OfficeAssignment> GetAllOfficeAssignments(bool trackChanges) => FindAll(trackChanges).OrderBy(oa => oa.Location).ToList();
+
     }
 }

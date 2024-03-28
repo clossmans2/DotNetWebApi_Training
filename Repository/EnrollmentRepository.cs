@@ -13,5 +13,7 @@ namespace Repository
         public EnrollmentRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Enrollment> GetAllEnrollments(bool trackChanges) => FindAll(trackChanges).OrderBy(e => e.StudentId).ToList();
     }
 }
