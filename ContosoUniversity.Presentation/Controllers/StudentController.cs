@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects;
 
 namespace ContosoUniversity.Presentation.Controllers
 {
@@ -20,15 +21,26 @@ namespace ContosoUniversity.Presentation.Controllers
         [HttpGet]
         public IActionResult GetStudents()
         {
-            try
-            {
-                var students = _service.Student.GetAllStudents(trackChanges: false);
-                return Ok(students);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
+            var students = _service.Student.GetAllStudents(trackChanges: false);
+            return Ok(students);
+        }
+
+        [HttpGet("{id:guid}", Name = "StudentById")]
+        public IActionResult GetStudent(Guid id)
+        {
+            var student = _service.Student.GetStudent(id, trackChanges: false);
+            return Ok(student);
+            
+        }
+
+        [HttpPost]
+        public IActionResult CreateStudent([FromBody] StudentForCreationDto student)
+        {
+            if (student == null)
+                return BadRequest("StudentForCreationDto object is null");
+            
+            var createdStudent = _service.Student.CreateStudent(student);
+            return CreatedAtRoute("StudentById", new { id = createdStudent.Id }, createdStudent);
         }
 
     }

@@ -14,6 +14,11 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Enrollment> GetAllEnrollments(bool trackChanges) => FindAll(trackChanges).OrderBy(e => e.StudentId).ToList();
+        public IEnumerable<Enrollment> GetAllEnrollments(Guid studentId, bool trackChanges) => 
+            FindByCondition(e => e.StudentId.Equals(studentId), trackChanges).ToList();
+
+        public Enrollment GetEnrollment(Guid studentId, Guid id, bool trackChanges) =>
+            FindByCondition(e => e.StudentId.Equals(studentId) && e.Id.Equals(id), trackChanges).SingleOrDefault();
+        
     }
 }

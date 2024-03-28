@@ -8,7 +8,7 @@ using Service.Contracts;
 
 namespace ContosoUniversity.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/student/{studentId:guid}/enrollment")]
     [ApiController]
     public class EnrollmentController : ControllerBase
     {
@@ -18,18 +18,17 @@ namespace ContosoUniversity.Presentation.Controllers
 
         [HttpGet]
 
-        public IActionResult GetAllEnrollments()
+        public IActionResult GetAllEnrollments(Guid studentId)
         {
-            try
-            {
-                var result = _service.Enrollment.GetAllEnrollments(trackChanges: false);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var enrollments = _service.Enrollment.GetAllEnrollments(studentId, trackChanges: false);
+            return Ok(enrollments);
+        }
 
+        [HttpGet("{id:guid}")]
+        public IActionResult GetEnrollment(Guid studentId, Guid id)
+        {
+            var enrollment = _service.Enrollment.GetEnrollment(studentId, id, trackChanges: false);
+            return Ok(enrollment);
         }
     }
 }

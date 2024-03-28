@@ -1,4 +1,6 @@
+using ContosoUniversity;
 using ContosoUniversity.Extensions;
+using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
@@ -13,15 +15,24 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
-builder.Services.AddControllers().AddApplicationPart(
+
+builder.Services.AddControllers(config =>
+{
+    config.RespectBrowserAcceptHeader = true;
+    config.ReturnHttpNotAcceptable = true;
+}).AddXmlDataContractSerializerFormatters()
+    .AddCustomCsvFormatter()
+    .AddApplicationPart(
     typeof(ContosoUniversity.Presentation.AssemblyReference).Assembly);
 
 // Creates an IHost that hosts a web application.
 // Creates an IApplicationBuilder for the middleware pipeline
 // Creates and IEndpointRouteBuilder for the endpoints
 var app = builder.Build();
-
+app.UseExceptionHandler(opt => { });
 /*
  * 1. Exception Handling
  * 2. HSTS (Strict Transport Security)
@@ -36,15 +47,10 @@ var app = builder.Build();
  */
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    // add middleware for Http-Strict-Transport-Security
+// add middleware for Http-Strict-Transport-Security
+if (app.Environment.IsProduction())
     app.UseHsts();
-}
+
 
 app.UseHttpsRedirection();
 
