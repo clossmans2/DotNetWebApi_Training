@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects;
 
 namespace ContosoUniversity.Presentation.Controllers
 {
@@ -18,18 +19,27 @@ namespace ContosoUniversity.Presentation.Controllers
 
         [HttpGet]
 
-        public IActionResult GetAllOfficeAssignmentController()
+        public IActionResult GetOfficeAssignments()
         {
-            try
-            {
-                var result = _service.OfficeAssignment.GetAllOfficeAssignments(trackChanges: false);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = _service.OfficeAssignment.GetAllOfficeAssignments(trackChanges: false);
+            return Ok(result);
+        }
 
+        [HttpGet("{id:guid}", Name = "OfficeAssignmentById")]
+        public IActionResult GetOfficeAssignment(Guid id)
+        {
+            var officeAssignment = _service.OfficeAssignment.GetOfficeAssignment(id, trackChanges: false);
+            return Ok(officeAssignment);
+        }
+
+        [HttpPost]
+        public IActionResult CreateOfficeAssignment([FromBody] OfficeAssignmentDto officeAssignment)
+        {
+            if (officeAssignment == null)
+                return BadRequest("OfficeAssignmentDto object is null");
+
+            var createdOfficeAssignment = _service.OfficeAssignment.CreateOfficeAssignment(officeAssignment);
+            return CreatedAtRoute("OfficeAssignmentById", new { id = createdOfficeAssignment.InstructorId }, createdOfficeAssignment);
         }
     }
 }

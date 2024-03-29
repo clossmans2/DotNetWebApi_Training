@@ -10,7 +10,7 @@ using Shared.DataTransferObjects;
 namespace ContosoUniversity.Presentation.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] // Attribute routing, Auto 400 response, binding source parameter, multi-part/form-data inference, problem details for status codes
     public class StudentController : ControllerBase
     {
         private readonly IServiceManager _service;

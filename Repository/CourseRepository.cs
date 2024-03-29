@@ -14,6 +14,11 @@ namespace Repository
         {
         }
 
+        public void CreateCourse(Course course) => Create(course);
+
         public IEnumerable<Course> GetAllCourses(bool trackChanges) => FindAll(trackChanges).OrderBy(c => c.Title).ToList();
+
+        public Course GetCourse(Guid courseId, bool trackChanges) =>
+            FindByCondition(c => c.Id.Equals(courseId), trackChanges).SingleOrDefault();
     }
 }

@@ -10,5 +10,7 @@ namespace Contracts
     public interface IInstructorRepository
     {
         IEnumerable<Instructor> GetAllInstructors(bool trackChanges);
+        Instructor GetInstructor(Guid instructorId, bool trackChanges);
+        void CreateInstructor(Instructor instructor);
     }
 }

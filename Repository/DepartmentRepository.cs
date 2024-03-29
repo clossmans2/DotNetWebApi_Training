@@ -14,6 +14,12 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Department> GetAllDepartments(bool trackChanges) => FindAll(trackChanges).OrderBy(s => s.Name).ToList();
+        public void CreateDepartment(Department department) => Create(department);
+
+        public IEnumerable<Department> GetAllDepartments(bool trackChanges) => 
+            FindAll(trackChanges).OrderBy(s => s.Name).ToList();
+
+        public Department GetDepartment(Guid id, bool trackChanges) =>
+            FindByCondition(d => d.Id.Equals(id), trackChanges).SingleOrDefault();
     }
 }

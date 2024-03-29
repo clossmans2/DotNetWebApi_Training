@@ -11,5 +11,7 @@ namespace Contracts
     {
         IEnumerable<Enrollment> GetAllEnrollments(Guid studentId, bool trackChanges);
         Enrollment GetEnrollment(Guid studentId, Guid id, bool trackChanges);
+
+        void CreateEnrollment(Enrollment enrollment);
     }
 }

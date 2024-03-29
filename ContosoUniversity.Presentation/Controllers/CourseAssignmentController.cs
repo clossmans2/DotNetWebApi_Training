@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects;
 
 namespace ContosoUniversity.Presentation.Controllers
 {
@@ -18,18 +19,34 @@ namespace ContosoUniversity.Presentation.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> GetAllCourseAssignments()
+        public IActionResult GetCourseAssignments()
         {
-            try
-            {
-                var result =  _service.CourseAssignment.GetAllCourseAssignments(trackChanges: false);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result =  _service.CourseAssignment.GetAllCourseAssignments(trackChanges: false);
+            return Ok(result);
+        }
 
+        [HttpGet("course/{id:guid}", Name = "CourseAssignmentsByCourseId")]
+        public IActionResult GetCourseAssignmentsByCourseId(Guid id)
+        {
+            var result = _service.CourseAssignment.GetCourseAssignmentsByCourseId(id, trackChanges: false);
+            return Ok(result);
+        }
+
+        [HttpGet("instructor/{id:guid}", Name = "CourseAssignmentsByInstructorId")]
+        public IActionResult GetCourseAssignmentsByInstructorId(Guid id)
+        {
+            var result = _service.CourseAssignment.GetCourseAssignmentsByInstructorId(id, trackChanges: false);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCourseAssignment([FromBody] CourseAssignmentDto courseAssignment)
+        {
+            if (courseAssignment == null)
+                return BadRequest("CourseAssignmentDto object is null");
+
+            var createdCourseAssignment = _service.CourseAssignment.CreateCourseAssignment(courseAssignment);
+            return CreatedAtRoute("CourseAssignmentByInstructorId", new { instructorId = createdCourseAssignment.InstructorId }, createdCourseAssignment);
         }
     }
 }

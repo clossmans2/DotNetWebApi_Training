@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects;
 
 namespace ContosoUniversity.Presentation.Controllers
 {
@@ -18,18 +19,27 @@ namespace ContosoUniversity.Presentation.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> GetAllCourses()
+        public IActionResult GetCourses()
         {
-            try
-            {
-                var result = _service.Course.GetAllCourses(trackChanges: false);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = _service.Course.GetAllCourses(trackChanges: false);
+            return Ok(result);
+        }
 
+        [HttpGet("{id:guid}", Name = "CourseById")]
+        public IActionResult GetCourse(Guid id)
+        {
+            var course = _service.Course.GetCourse(id, trackChanges: false);
+            return Ok(course);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCourse([FromBody] CourseForCreationDto course)
+        {
+            if (course == null)
+                return BadRequest("CourseForCreationDto object is null");
+
+            var createdCourse = _service.Course.CreateCourse(course);
+            return CreatedAtRoute("CourseById", new { id = createdCourse.Id }, createdCourse);
         }
     }
 }

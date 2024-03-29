@@ -14,6 +14,8 @@ namespace Repository
         {
         }
 
+        public void CreateEnrollment(Enrollment enrollment) => Create(enrollment);
+
         public IEnumerable<Enrollment> GetAllEnrollments(Guid studentId, bool trackChanges) => 
             FindByCondition(e => e.StudentId.Equals(studentId), trackChanges).ToList();
 

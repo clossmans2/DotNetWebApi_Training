@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shared.DataTransferObjects
 {
-    public record EnrollmentDto
+    public record OfficeAssignmentDto
     {
-        public Guid Id { get; init; } 
-        public Guid StudentId { get; init; }
-        public Guid CourseId { get; init; }
-        
+        public Guid InstructorId { get; init; }
+        public string? Location { get; init; }
     }
-
 }

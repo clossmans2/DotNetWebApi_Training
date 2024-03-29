@@ -12,5 +12,6 @@ namespace Service.Contracts
     {
         IEnumerable<EnrollmentDto> GetAllEnrollments(Guid studentId, bool trackChanges);
         EnrollmentDto GetEnrollment(Guid studentId, Guid id, bool trackChanges);
+        EnrollmentDto CreateEnrollment(EnrollmentForCreationDto enrollment);
     }
 }

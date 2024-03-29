@@ -14,6 +14,13 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Instructor> GetAllInstructors(bool trackChanges) => FindAll(trackChanges).OrderBy(s => s.LastName).ToList();
+        public IEnumerable<Instructor> GetAllInstructors(bool trackChanges) => 
+            FindAll(trackChanges).OrderBy(s => s.LastName).ToList();
+
+        public void CreateInstructor(Instructor instructor) => Create(instructor);
+
+        public Instructor GetInstructor(Guid instructorId, bool trackChanges) =>
+            FindByCondition(i => i.Id.Equals(instructorId), trackChanges).SingleOrDefault();
+
     }
 }

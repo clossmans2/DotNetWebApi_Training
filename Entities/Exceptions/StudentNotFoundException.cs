@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+namespace Entities.Exceptions
 {
     public class StudentNotFoundException : NotFoundException
     {
-        public StudentNotFoundException(Guid studentId) : base($"The student with the id: {studentId} doesn't exist in the database.")
+        public StudentNotFoundException(Guid studentId) 
+            : base($"The student with the id: {studentId} doesn't exist in the database.")
         {
         }
     }

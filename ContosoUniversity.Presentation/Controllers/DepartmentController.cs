@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects;
 
 namespace ContosoUniversity.Presentation.Controllers
 {
@@ -18,18 +19,29 @@ namespace ContosoUniversity.Presentation.Controllers
 
         [HttpGet]
 
-        public IActionResult GetAllDepartments()
+        public IActionResult GetDepartments()
         {
-            try
+            var result = _service.Department.GetAllDepartments(trackChanges: false);
+            return Ok(result);
+        }
+
+        [HttpGet("{id:guid}", Name = "DepartmentById")]
+        public IActionResult GetDepartment(Guid id)
+        {
+            var department = _service.Department.GetDepartment(id, trackChanges: false);
+            return Ok(department);
+        }
+
+        [HttpPost]
+        public IActionResult CreateDepartment([FromBody] DepartmentForCreationDto department)
+        {
+            if (department == null)
             {
-                var result = _service.Department.GetAllDepartments(trackChanges: false);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
+                return BadRequest("DepartmentForCreationDto object is null");
             }
 
+            var createdDepartment = _service.Department.CreateDepartment(department);
+            return CreatedAtRoute("DepartmentById", new { id = createdDepartment.Id }, createdDepartment);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
 using Entities;
+using Entities.Exceptions;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -22,6 +23,25 @@ namespace Service
             _repositoryManager = repositoryManager;
             _logger = logger;
             _mapper = mapper;
+        }
+
+        public EnrollmentDto CreateEnrollment(EnrollmentForCreationDto enrollment)
+        {
+            var student = _repositoryManager.Student.GetStudent(enrollment.StudentId, false);
+            if (student == null)
+                throw new StudentNotFoundException(enrollment.StudentId);
+
+            var course = _repositoryManager.Course.GetCourse(enrollment.CourseId, false);
+            if (course == null)
+                throw new CourseNotFoundException(enrollment.CourseId);
+
+            var enrollmentEntity = _mapper.Map<Enrollment>(enrollment);
+            enrollmentEntity.Student = student;
+            enrollmentEntity.Course = course;
+            _repositoryManager.Enrollment.CreateEnrollment(enrollmentEntity);
+            _repositoryManager.Save();
+            var enrollmentToReturn = _mapper.Map<EnrollmentDto>(enrollmentEntity);
+            return enrollmentToReturn;            
         }
 
         public IEnumerable<EnrollmentDto> GetAllEnrollments(Guid studentId, bool trackChanges)
