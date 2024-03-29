@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ContosoUniversity.Presentation.Controllers
 {
@@ -19,29 +20,77 @@ namespace ContosoUniversity.Presentation.Controllers
 
 
         [HttpGet]
-        public IActionResult GetStudents()
+        public async Task<IActionResult> GetStudents()
         {
-            var students = _service.Student.GetAllStudents(trackChanges: false);
+            var students = await _service.Student.GetAllStudentsAsync(trackChanges: false);
             return Ok(students);
         }
 
         [HttpGet("{id:guid}", Name = "StudentById")]
-        public IActionResult GetStudent(Guid id)
+        public async Task<IActionResult> GetStudent(Guid id)
         {
-            var student = _service.Student.GetStudent(id, trackChanges: false);
+            var student = await _service.Student.GetStudentAsync(id, trackChanges: false);
             return Ok(student);
             
         }
+        
 
         [HttpPost]
-        public IActionResult CreateStudent([FromBody] StudentForCreationDto student)
+        public async Task<IActionResult> CreateStudent([FromBody] StudentForCreationDto student)
         {
             if (student == null)
                 return BadRequest("StudentForCreationDto object is null");
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
             
-            var createdStudent = _service.Student.CreateStudent(student);
+            var createdStudent = await _service.Student.CreateStudentAsync(student);
             return CreatedAtRoute("StudentById", new { id = createdStudent.Id }, createdStudent);
         }
 
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteStudent(Guid id)
+        {
+            await _service.Student.DeleteStudentAsync(id, trackChanges: false);
+            return NoContent();
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateStudent(Guid id, [FromBody] StudentForUpdateDto student)
+        {
+            if (student == null)
+                return BadRequest("StudentForUpdateDto object is null");
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
+            await _service.Student.UpdateStudentAsync(id, student, trackChanges: true);
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Patch Operations
+        /// Add, Replace, Remove
+        /// Copy, Move, Test
+        /// Properties within a Patch Request:
+        /// op: operation, path: path to the property, value: value to be used
+        [HttpPatch("{id:guid}")]
+        public async Task<IActionResult> PartiallyUpdateStudent(Guid id, [FromBody] JsonPatchDocument<StudentForUpdateDto> patchDocument)
+        {
+            if (patchDocument is null)
+                return BadRequest("patchDocument object sent from client is null");
+
+            var result = await _service.Student.GetStudentForPatchAsync(id, trackChanges: true);
+            patchDocument.ApplyTo(result.studentForUpdate);
+
+            TryValidateModel(result.studentForUpdate);
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
+            await _service.Student.SaveChangesForPatchAsync(result.studentForUpdate, result.studentEntity);
+
+            return NoContent();
+        }
     }
 }

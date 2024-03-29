@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Contracts;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -21,5 +22,19 @@ namespace Repository
             FindByCondition(s => s.Id.Equals(studentId), trackChanges).SingleOrDefault();
 
         public void CreateStudent(Student student) => Create(student);
+
+        public void DeleteStudent(Student student) => Delete(student);
+
+        public async Task<IEnumerable<Student>> GetAllStudentsAsync(bool trackChanges) =>
+            await FindAll(trackChanges)
+                .OrderBy(s => s.LastName)
+                .ToListAsync();
+                
+
+
+        public async Task<Student> GetStudentAsync(Guid studentId, bool trackChanges) =>
+            await FindByCondition(s => s.Id.Equals(studentId), trackChanges)
+                .SingleOrDefaultAsync();
+
     }
 }

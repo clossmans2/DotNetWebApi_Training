@@ -55,6 +55,13 @@ namespace Service
             return enrollmentsDto;
         }
 
+        public async Task<IEnumerable<EnrollmentDto>> GetAllEnrollmentsAsync(Guid studentId, bool trackChanges)
+        {
+            var enrollments = await _repositoryManager.Enrollment.GetEnrollmentsForStudentAsync(studentId, trackChanges);
+            var enrollmentsDto = _mapper.Map<IEnumerable<EnrollmentDto>>(enrollments);
+            return enrollmentsDto;
+        }
+
         public EnrollmentDto GetEnrollment(Guid studentId, Guid id, bool trackChanges)
         {
             var student = _repositoryManager.Student.GetStudent(studentId, trackChanges);

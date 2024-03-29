@@ -7,5 +7,8 @@ using System.Threading.Tasks;
 
 namespace Shared.DataTransferObjects
 {
-    public record StudentForCreationDto : StudentForManipulationDto;
+    public record StudentForUpdateDto : StudentForManipulationDto
+    {
+        public ICollection<EnrollmentForUpdateDto>? Enrollments { get; init; }
+    }
 }

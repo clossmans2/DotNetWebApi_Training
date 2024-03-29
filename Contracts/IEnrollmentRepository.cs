@@ -9,6 +9,7 @@ namespace Contracts
 {
     public interface IEnrollmentRepository
     {
+        Task<IEnumerable<Enrollment>> GetEnrollmentsForStudentAsync(Guid studentId, bool trackChanges);
         IEnumerable<Enrollment> GetAllEnrollments(Guid studentId, bool trackChanges);
         Enrollment GetEnrollment(Guid studentId, Guid id, bool trackChanges);
 

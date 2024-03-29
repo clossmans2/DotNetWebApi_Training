@@ -16,5 +16,6 @@ namespace Contracts
         IOfficeAssignmentRepository OfficeAssignment { get; }
         IDepartmentRepository Department { get; }
         void Save();
+        Task SaveAsync();
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -21,6 +22,9 @@ namespace Repository
 
         public Enrollment GetEnrollment(Guid studentId, Guid id, bool trackChanges) =>
             FindByCondition(e => e.StudentId.Equals(studentId) && e.Id.Equals(id), trackChanges).SingleOrDefault();
+
+        public async Task<IEnumerable<Enrollment>> GetEnrollmentsForStudentAsync(Guid studentId, bool trackChanges) =>
+            await FindByCondition(e => e.StudentId.Equals(studentId), trackChanges).ToListAsync();
         
     }
 }

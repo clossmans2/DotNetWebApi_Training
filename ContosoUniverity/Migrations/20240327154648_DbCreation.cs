@@ -99,7 +99,7 @@ namespace ContosoUniversity.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "DepartmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade); //TODO: Change this to NoAction, will require dropping the DB
                 });
 
             migrationBuilder.CreateTable(

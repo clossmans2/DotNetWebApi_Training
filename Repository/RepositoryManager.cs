@@ -46,5 +46,7 @@ namespace Repository
         public IDepartmentRepository Department => _departmentRepository.Value;
 
         public void Save() => _repositoryContext.SaveChanges();
+
+        public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
     }
 }
