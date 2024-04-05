@@ -33,5 +33,16 @@ namespace ContosoUniversity.Presentation.Controllers
             }
             return Created();
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
+        {
+            if (!await _service.Authentication.ValidateUser(userForAuthentication))
+            {
+                return Unauthorized();
+            }
+            
+            return Ok(new { Token = await _service.Authentication.CreateToken() });
+        }
     }
 }
