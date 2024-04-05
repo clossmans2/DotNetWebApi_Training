@@ -24,7 +24,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
-
+builder.Services.ConfigureSwagger();
 
 builder.Services.AddControllers(config =>
 {
@@ -35,6 +35,8 @@ builder.Services.AddControllers(config =>
     .AddCustomCsvFormatter()
     .AddApplicationPart(
     typeof(ContosoUniversity.Presentation.AssemblyReference).Assembly);
+
+
 
 // Creates an IHost that hosts a web application.
 // Creates an IApplicationBuilder for the middleware pipeline
@@ -75,6 +77,12 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
+
+app.UseSwagger();
+app.UseSwaggerUI(s =>
+{
+    s.SwaggerEndpoint("/swagger/v1/swagger.json", "ContosoUniversity API V1");
+});
 
 app.MapControllers();
 

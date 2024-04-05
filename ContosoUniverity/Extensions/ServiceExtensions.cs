@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Contracts;
 using LoggerService;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Repository;
 using Service;
 using Service.Contracts;
@@ -48,5 +49,11 @@ namespace ContosoUniversity.Extensions
 
         public static IMvcBuilder AddCustomCsvFormatter(this IMvcBuilder builder) =>
             builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
+
+        public static void ConfigureSwagger(this IServiceCollection services) =>
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo { Title = "ContosoUniversity", Version = "v1" });
+            });
     }
 }
