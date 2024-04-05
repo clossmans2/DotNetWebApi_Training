@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace ContosoUniversity.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240405144542_CreatingIdentityTables")]
+    partial class CreatingIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,76 +250,76 @@ namespace ContosoUniversity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("943c2948-261e-4d9a-a809-f7a1cd6a994a"),
+                            Id = new Guid("344dd44b-2ca1-46c4-9988-7f95eefa134f"),
                             CourseId = new Guid("ba22eae4-8282-483d-8d43-e3b47bd105d4"),
                             Grade = 0,
                             StudentId = new Guid("06917677-cdd6-4523-91b8-88d6d0a912d2")
                         },
                         new
                         {
-                            Id = new Guid("98b04fef-5db5-463f-b493-88ec84390b15"),
+                            Id = new Guid("bf5a9604-3382-4b96-908a-124a8fc4aba0"),
                             CourseId = new Guid("854f1892-e043-49e0-9573-5544e833a8d3"),
                             Grade = 2,
                             StudentId = new Guid("06917677-cdd6-4523-91b8-88d6d0a912d2")
                         },
                         new
                         {
-                            Id = new Guid("1b2ffe83-2e89-40c0-9ab3-ab63ff490a4d"),
+                            Id = new Guid("eb143e84-0dad-4929-9e62-d225fa26e7f5"),
                             CourseId = new Guid("ad18dff5-58ee-4e02-ba83-ffd1c8a1f56e"),
                             Grade = 1,
                             StudentId = new Guid("06917677-cdd6-4523-91b8-88d6d0a912d2")
                         },
                         new
                         {
-                            Id = new Guid("362d7045-1f14-4071-ac69-95bff93376de"),
+                            Id = new Guid("b0a78f3e-b27f-4dd9-a45d-1c5e6e873bf1"),
                             CourseId = new Guid("db564e68-2fe5-42e5-ba48-b2b49034d3d2"),
                             Grade = 1,
                             StudentId = new Guid("798acf1b-7339-44bd-8367-7132a978d7b1")
                         },
                         new
                         {
-                            Id = new Guid("86801203-bee9-4c83-979f-12a3b0704f47"),
+                            Id = new Guid("fcc57361-ed2f-431a-9c39-6ac4b780c4a0"),
                             CourseId = new Guid("83af998c-0bfd-4855-8c5a-4e1920b9d025"),
                             Grade = 1,
                             StudentId = new Guid("798acf1b-7339-44bd-8367-7132a978d7b1")
                         },
                         new
                         {
-                            Id = new Guid("fd69392f-2fb8-4b9e-94fc-90aa33d72964"),
+                            Id = new Guid("f0f58d9b-9cb9-4928-8d70-a3d2d9b0d7f2"),
                             CourseId = new Guid("597800e1-0267-4ba0-81dd-a0f07aa98b20"),
                             Grade = 1,
                             StudentId = new Guid("798acf1b-7339-44bd-8367-7132a978d7b1")
                         },
                         new
                         {
-                            Id = new Guid("7f1c6539-457d-465a-b6e3-bef5db150cb9"),
+                            Id = new Guid("79a8800c-fd86-4d14-8273-8fd95cacd206"),
                             CourseId = new Guid("ba22eae4-8282-483d-8d43-e3b47bd105d4"),
                             StudentId = new Guid("2a36409f-6732-459b-b7d1-a561c521a3cb")
                         },
                         new
                         {
-                            Id = new Guid("5746fc58-3117-4cc7-b015-1269d46ffedc"),
+                            Id = new Guid("038d857d-37bc-4d7c-ad14-77ceed5e3a61"),
                             CourseId = new Guid("854f1892-e043-49e0-9573-5544e833a8d3"),
                             Grade = 1,
                             StudentId = new Guid("2a36409f-6732-459b-b7d1-a561c521a3cb")
                         },
                         new
                         {
-                            Id = new Guid("2d4af0d5-b4e0-4d97-b04e-c6e360b9caa6"),
+                            Id = new Guid("3d95ca5d-716f-4f86-9d35-1198f1c9edd2"),
                             CourseId = new Guid("ba22eae4-8282-483d-8d43-e3b47bd105d4"),
                             Grade = 1,
                             StudentId = new Guid("7d84360e-4967-4c7b-8e4c-0f085de7ca4d")
                         },
                         new
                         {
-                            Id = new Guid("f18430d0-abd2-49ab-9bc9-bd2e57f8849a"),
+                            Id = new Guid("5af9aef4-4d52-4be4-9f70-6fb8daf1cd33"),
                             CourseId = new Guid("597800e1-0267-4ba0-81dd-a0f07aa98b20"),
                             Grade = 1,
                             StudentId = new Guid("7a1be69a-38ac-4cde-a105-615de38c2d12")
                         },
                         new
                         {
-                            Id = new Guid("504ad13d-81d6-437f-8774-e8a519f41f14"),
+                            Id = new Guid("1d1b57a2-1b34-402d-9067-a33a60594eee"),
                             CourseId = new Guid("b178e749-1f02-4461-8e5d-bb97c49eb375"),
                             Grade = 1,
                             StudentId = new Guid("5e9c10d4-3b0a-4ccb-8a77-fb2d7e702c6b")
@@ -618,20 +621,6 @@ namespace ContosoUniversity.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f820724f-7c0e-400a-a403-7d86f2eb11ca",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "1d3bb70e-dbf3-408f-af79-648c88ddc074",
-                            Name = "Professor",
-                            NormalizedName = "PROFESSOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

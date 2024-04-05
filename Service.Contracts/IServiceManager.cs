@@ -15,5 +15,6 @@ namespace Service.Contracts
         IOfficeAssignmentService OfficeAssignment { get; }
         ICourseAssignmentService CourseAssignment { get; }
         IEnrollmentService Enrollment { get; }
+        IAuthenticationService Authentication { get; }
     }
 }

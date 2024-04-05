@@ -28,6 +28,7 @@ namespace ContosoUniversity
             CreateMap<StudentForUpdateDto, Student>().ReverseMap();
             CreateMap<Student, StudentWithEnrollmentsDto>();
             CreateMap<EnrollmentForUpdateDto, Enrollment>();
+            CreateMap<UserForRegistrationDto, User>();
         }
     }
 }
