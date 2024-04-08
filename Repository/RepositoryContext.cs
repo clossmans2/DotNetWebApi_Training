@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Entities;
 using Repository.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Entities.Models;
 
 namespace Repository
 {

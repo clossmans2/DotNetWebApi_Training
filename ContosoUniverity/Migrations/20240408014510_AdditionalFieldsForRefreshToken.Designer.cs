@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace ContosoUniversity.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240408014510_AdditionalFieldsForRefreshToken")]
+    partial class AdditionalFieldsForRefreshToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -628,13 +631,13 @@ namespace ContosoUniversity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f820724f-7c0e-400a-a403-7d86f2eb11ca",
+                            Id = "1ec3030e-17af-426d-8960-86882aa7bd72",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1d3bb70e-dbf3-408f-af79-648c88ddc074",
+                            Id = "adafea42-ab4e-4146-8d18-fa1d7f45b5f1",
                             Name = "Professor",
                             NormalizedName = "PROFESSOR"
                         });

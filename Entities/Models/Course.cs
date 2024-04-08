@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities
+namespace Entities.Models
 {
     public class Course
     {
@@ -19,7 +19,7 @@ namespace Entities
         public Department? Department { get; set; }
 
         public ICollection<Enrollment>? Enrollments { get; set; }
-        public ICollection<CourseAssignment>? CourseAssignments { get; set; }   
+        public ICollection<CourseAssignment>? CourseAssignments { get; set; }
 
     }
 }

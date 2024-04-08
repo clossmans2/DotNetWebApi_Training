@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Contracts;
-using Entities;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repository

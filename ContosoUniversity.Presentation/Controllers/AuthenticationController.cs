@@ -41,8 +41,10 @@ namespace ContosoUniversity.Presentation.Controllers
             {
                 return Unauthorized();
             }
+
+            var tokenDto = await _service.Authentication.CreateToken(populateExp: true);
             
-            return Ok(new { Token = await _service.Authentication.CreateToken() });
+            return Ok(tokenDto);
         }
     }
 }

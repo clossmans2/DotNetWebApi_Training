@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ContosoUniversity.Presentation</name>
+    </assembly>
+    <members>
+        <member name="M:ContosoUniversity.Presentation.Controllers.StudentController.GetStudents">
+            <summary>
+            Gets all students in the database
+            </summary>
+            <returns>A list of all the students</returns>
+            <response code="200">Returns a list of students</response>
+        </member>
+        <member name="M:ContosoUniversity.Presentation.Controllers.StudentController.GetStudent(System.Guid)">
+            <summary>
+            Gets a single student using the student's id
+            </summary>
+            <param name="id">GUID that identifies the student record</param>
+            <returns>A single student object</returns>
+            <response code="200">Returns the student object</response>
+            <response code="400">If the student id is null</response>
+            <response code="404">If the student object is not found</response>
+        </member>
+        <member name="M:ContosoUniversity.Presentation.Controllers.StudentController.CreateStudent(Shared.DataTransferObjects.StudentForCreationDto)">
+            <summary>
+            Creates a new student in the database
+            </summary>
+            <param name="student">An object containing firstMidName, lastName, email, and enrollmentDate values</param>
+            <returns>The newly created student object</returns>
+            <response code="201">Returns the newly created student object</response>
+            <response code="400">If the student object is null</response>
+            <response code="422">If the model state is invalid</response>
+        </member>
+        <member name="M:ContosoUniversity.Presentation.Controllers.StudentController.DeleteStudent(System.Guid)">
+            <summary>
+            Deletes a student from the database
+            </summary>
+            <param name="id">GUID used to identify the student</param>
+            <response code="204">If the delete action was successful</response>
+            <response code="404">If the student object is not found</response>
+        </member>
+        <member name="M:ContosoUniversity.Presentation.Controllers.StudentController.UpdateStudent(System.Guid,Shared.DataTransferObjects.StudentForUpdateDto)">
+            <summary>
+            Updates a student in the database
+            </summary>
+            <param name="id">A GUID used to identify the student record to update</param>
+            <param name="student">The updated student object to save to the database</param>
+            <response code="204">If the update action was successful</response>
+            <response code="400">If the student object is null</response>
+            <response code="422">If the model state is invalid</response>
+        </member>
+        <member name="M:ContosoUniversity.Presentation.Controllers.StudentController.PartiallyUpdateStudent(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Shared.DataTransferObjects.StudentForUpdateDto})">
+            <summary>
+            Uses a patch document to update a student in the database
+            Patch Operations
+            Add, Replace, Remove
+            Copy, Move, Test
+            Properties within a Patch Request:
+            op: operation, path: path to the property, value: value to be used
+            </summary>
+            <param name="id">GUID used to identify the student record to update</param>
+            <param name="patchDocument">A JSON patch document containing the operations to perform</param>
+            <response code="204">If the update action was successful</response>
+            <response code="400">If the patchDocument object is null</response>
+            <response code="422">If the model state is invalid</response>
+        </member>
+    </members>
+</doc>

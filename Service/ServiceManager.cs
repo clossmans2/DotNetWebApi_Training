@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
-using Entities;
+using Entities.ConfigurationModels;
+using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Service.Contracts;
 
 namespace Service
@@ -23,7 +25,12 @@ namespace Service
         private readonly Lazy<IEnrollmentService> _enrollmentService;
         private readonly Lazy<IAuthenticationService> _authenticationService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
+        public ServiceManager(
+            IRepositoryManager repositoryManager,
+            ILoggerManager logger,
+            IMapper mapper,
+            UserManager<User> userManager,
+            IOptions<JwtConfiguration> configuration)
         {
             _studentService = new Lazy<IStudentService>(() => new StudentService(repositoryManager, logger, mapper));
             _courseService = new Lazy<ICourseService>(() => new CourseService(repositoryManager, logger, mapper));

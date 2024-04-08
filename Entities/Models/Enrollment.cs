@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities
+namespace Entities.Models
 {
     public enum Grade
     {
         A,
-        B, 
+        B,
         C,
         D,
         F

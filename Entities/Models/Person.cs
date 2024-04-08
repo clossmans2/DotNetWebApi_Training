@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities
+namespace Entities.Models
 {
     public abstract class Person
     {
@@ -20,7 +20,7 @@ namespace Entities
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
-        
+
         public string? FullName
         {
             get

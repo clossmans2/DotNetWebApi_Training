@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
-using Entities;
 using Entities.Exceptions;
+using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 

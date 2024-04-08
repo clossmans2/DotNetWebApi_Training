@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities
+namespace Entities.Models
 {
     public class CourseAssignment
     {
